@@ -66,7 +66,7 @@ function readJsonInfoOfAllPosts(filePath){
             link:'./' + targetFileName + '.html',
             title: dryTitle && dryTitle[1] || targetFileName,
             intro: dryIntro && dryIntro[1] || '',
-            pic: dryPic && dryPic[1] || 'https://source.unsplash.com/DnWYw0zLJBg'
+            pic: dryPic && dryPic[1] || './assets/default.jpeg'
         });
      });
     // console.log(postArrays);
