@@ -3,6 +3,12 @@ body,html{
   margin:0;
   font-family: "Telefon Black", Sans-Serif;
 }
+.markdown-body{
+  width:1200px;
+  margin:20px auto;
+  box-shadow: 0px 0px 8px #a8a7a736;
+  padding:50px;
+}
 .nav-wraper{
   height: 50px;
   line-height: 50px;
@@ -26,18 +32,4 @@ body,html{
 .nav-item a:hover{
   color:#ea4c4c;
   border-bottom: 3px solid #ea4c4c;
-}
-
-.post-item{
-  height: 100px;
-  border:1px solid grey;
-  overflow: hidden;
-  margin-top:20px;
-}
-.post-title{
-  font-size:16px;
-}
-.post-title{
-  height: 40px;
-  overflow: hidden;
 }

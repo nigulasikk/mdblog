@@ -8,9 +8,9 @@ init();
 function init(){
     initDir();
     writeHomepageHtml();
-    readFolder('./src/posts');
+    readFolder('./src/markdowns');
     copyFolder('./src/assets')
-    readJsonInfoOfAllPosts('./src/posts');
+    readJsonInfoOfAllPosts('./src/markdowns');
 }
 
 // 初始化目录结构
@@ -54,24 +54,43 @@ function readJsonInfoOfAllPosts(filePath){
         // 无后缀文件名
         let targetFileName = filename.replace('.md','');
         let markdownContent = readFileAndParse(filePath + '/' + filename);
+        // 自定义博客列表的内容
+        let dryTitle = /<!--<title>(.*)<\/title>-->/.exec(markdownContent);
+        let dryIntro= /<!--<intro>(.*)<\/intro>-->/.exec(markdownContent);
+        let dryPic= /<!--<img-url>(.*)<\/img-url>-->/.exec(markdownContent);
+        let dryTag= /<!--<tag>(.*)<\/tag>-->/.exec(markdownContent);
+        let dryDate= /<!--<date>(.*)<\/date>-->/.exec(markdownContent);
         postArrays.push({
-            title: targetFileName,
-            content: markdownContent
+            date: dryDate && dryDate[1] || '',
+            tag: dryTag && dryTag[1] || '无标签',
+            link:'./' + targetFileName + '.html',
+            title: dryTitle && dryTitle[1] || targetFileName,
+            intro: dryIntro && dryIntro[1] || '',
+            pic: dryPic && dryPic[1] || 'https://source.unsplash.com/DnWYw0zLJBg'
         });
      });
+    // console.log(postArrays);
     writePostHtml(postArrays);
 }
 // posts.html
 function writePostHtml(postsList) {
     let rawHtml = readFileAndParse('./src/index.html');
-    let headDOM = fs.readFileSync('./src/TopNav/nav.html', 'utf-8');
-    let headCSS = fs.readFileSync('./src/TopNav/nav.css', 'utf-8');
-    let headJS = fs.readFileSync('./src/TopNav/nav.js', 'utf-8');
+    let headDOM = fs.readFileSync('./src/components/TopNav/nav.html', 'utf-8');
+    let headCSS = fs.readFileSync('./src/components/TopNav/nav.css', 'utf-8');
+    let postsPageCSS = fs.readFileSync('./src/components/Posts/posts.css', 'utf-8');
+    let headJS = fs.readFileSync('./src/components/TopNav/nav.js', 'utf-8');
     let postsDom = '';
     for (var i = 0;i<postsList.length;i++){
         postsDom += '<div class="post-item">' +
-                        '<div class="post-title">' + postsList[i].title + '</div>'+
-                        // '<div class="post-content">' + postsList[i].content + '</div>'+
+                        '<div class="post-pic"><img src="' + postsList[i].pic + '" height="200" alt="love"/></div>'+
+                        '<div class="post-detail">' +
+                            '<div class="post-category">'+postsList[i].tag+'</div><br/>'+
+                            '<div class="post-title">' + 
+                                '<a href="' + postsList[i].link +'">'+postsList[i].title +'</a>'+
+                            '</div>'+
+                            '<div class="post-content">' + postsList[i].intro + '</div>'+
+                            ' <div class="post-date"> ' + postsList[i].date + ' </div>'+ 
+                        '</div>'+
                     '</div>'
     }
     // 读取模板 ，把markdown内容注入
@@ -80,6 +99,7 @@ function writePostHtml(postsList) {
                 .replace('<!-- title -->', '文章列表')
                 .replace('<!-- header DOM -->', headDOM)
                 .replace('<!-- header CSS -->', '<style>' + headCSS + '</style>')
+                .replace('<!-- postsPageCSS CSS -->', '<style>' + postsPageCSS + '</style>')
                 .replace('<!-- header JS -->', '<script>' + headJS + '</script>')
             ;
     fs.writeFileSync('./'+ outputFold +'/'  + 'posts.html', html, 'utf8');
@@ -88,12 +108,12 @@ function writePostHtml(postsList) {
 // 文章详情页把内容写入模板html
 function writeHtml(fileName,content) {
     let rawHtml = readFileAndParse('./src/index.html');
-    let headDOM = fs.readFileSync('./src/TopNav/nav.html', 'utf-8');
-    let headCSS = fs.readFileSync('./src/TopNav/nav.css', 'utf-8');
-    let headJS = fs.readFileSync('./src/TopNav/nav.js', 'utf-8');
+    let headDOM = fs.readFileSync('./src/components/TopNav/nav.html', 'utf-8');
+    let headCSS = fs.readFileSync('./src/components/TopNav/nav.css', 'utf-8');
+    let headJS = fs.readFileSync('./src/components/TopNav/nav.js', 'utf-8');
     // 读取模板 ，把markdown内容注入
     let html = rawHtml
-                .replace('<!-- content -->', content)
+                .replace('<!-- content -->', '<div class="markdown-body">' + content + '</div>')
                 .replace('<!-- title -->', fileName)
                 .replace('<!-- header DOM -->', headDOM)
                 .replace('<!-- header CSS -->', '<style>' + headCSS + '</style>')
@@ -105,12 +125,12 @@ function writeHtml(fileName,content) {
 // 首页
 function writeHomepageHtml() {
     let rawHtml = readFileAndParse('./src/index.html');
-    let homepageDOM = fs.readFileSync('./src/HomePage/homepage.html', 'utf-8');
-    let homepageCSS = fs.readFileSync('./src/HomePage/homepage.css', 'utf-8');
-    let homepageJS = fs.readFileSync('./src/HomePage/homepage.js', 'utf-8');
-    let headDOM = fs.readFileSync('./src/TopNav/nav.html', 'utf-8');
-    let headCSS = fs.readFileSync('./src/TopNav/nav.css', 'utf-8');
-    let headJS = fs.readFileSync('./src/TopNav/nav.js', 'utf-8');
+    let homepageDOM = fs.readFileSync('./src/components/HomePage/homepage.html', 'utf-8');
+    let homepageCSS = fs.readFileSync('./src/components/HomePage/homepage.css', 'utf-8');
+    let homepageJS = fs.readFileSync('./src/components/HomePage/homepage.js', 'utf-8');
+    let headDOM = fs.readFileSync('./src/components/TopNav/nav.html', 'utf-8');
+    let headCSS = fs.readFileSync('./src/components/TopNav/nav.css', 'utf-8');
+    let headJS = fs.readFileSync('./src/components/TopNav/nav.js', 'utf-8');
     // 读取模板 ，把markdown内容注入
     let html = rawHtml
                 .replace('<!-- title -->', pageTitle)
