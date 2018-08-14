@@ -1,0 +1,43 @@
+body,html{
+  padding:0;
+  margin:0;
+  font-family: "Telefon Black", Sans-Serif;
+}
+.nav-wraper{
+  height: 50px;
+  line-height: 50px;
+  width:100%;
+  box-shadow: 1px 3px 3px #a8a7a736;
+}
+.nav-item{
+  display: inline-block;
+  margin-left:80px;
+  color:#333333;
+  font-size: 20px;
+}
+.nav-item:first-child{
+  margin-left:200px;
+}
+.nav-item a{
+  color:black;
+  text-decoration: none;
+  border-bottom: 3px solid white;
+}
+.nav-item a:hover{
+  color:#ea4c4c;
+  border-bottom: 3px solid #ea4c4c;
+}
+
+.post-item{
+  height: 100px;
+  border:1px solid grey;
+  overflow: hidden;
+  margin-top:20px;
+}
+.post-title{
+  font-size:16px;
+}
+.post-title{
+  height: 40px;
+  overflow: hidden;
+}

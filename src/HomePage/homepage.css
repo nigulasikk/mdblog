@@ -1,0 +1,53 @@
+.heart-color{
+  color:#ea4c4c;
+}
+.homepage-title{
+  font-size:30px;
+  font-weight: bolder;
+  text-align: center;
+  margin:60px auto;
+}
+
+/*心*/
+.heart{
+  position:relative;
+  font-size: 12px;
+  margin:100px auto;
+  width:8em;
+
+}
+.heart:hover .squar,.heart:hover .circle{
+  animation-play-state: paused;
+}
+.squar,.circle{
+  background:#ea4c4c;
+  position:absolute;
+  -webkit-animation: beat 0.8s  infinite;
+  -moz-animation: beat 0.8s  infinite;
+  animation: beat 0.8s  infinite;
+}
+.squar{
+  width:4em;
+  height:4em;
+  left:2em;
+  top:2em;
+}
+.circle{
+  width:4em;
+  height:4em;
+  border-radius:50%;
+  top:.3em;
+}
+.left{
+  left:.3em;
+}
+.right{
+  left:3.7em;
+}
+
+@keyframes beat {
+    0% {transform: scale(1) rotate(45deg); box-shadow:0 0 .7em #ea4c4c;}
+    30% {transform: scale(1.03) rotate(45deg);  box-shadow:0 0 1em #ea4c4c;}
+  61.8%{transform: scale(1.0618) rotate(45deg);  box-shadow:0 0 1.1em #ea4c4c;}
+    100% {transform: scale(1) rotate(45deg); box-shadow:0 0 1em #ea4c4c;}
+}
