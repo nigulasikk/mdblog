@@ -1,21 +1,61 @@
 .heart-color{
   color:#ea4c4c;
 }
-.homepage-title{
-  font-size:20px;
-  font-weight: bolder;
-  text-align: center;
-  margin:60px auto;
+#kaikai-logo{
+  width:80px;
+  height:30px;
+  text-align:center;
+  line-height:30px;
+  font-size:12px;
+  font-weight:bolder;
+  background:red;
+  color:white;
+  letter-spacing:2px;
+  border-radius:3px 3px 10px 10px;
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.5);
+  transform: rotate(90deg);
+  transform-origin: top right;
+  position:absolute;
+  right:0;
+  top:250px;
 }
-.heart-wraper{
+.bg {
+  padding:0;
   position: relative;
-  min-height: 200px;
+  background: url(https://images.unsplash.com/photo-1510256024294-cfce23b259c3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=db823bc279e83b297eb3f06402acf6f9) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  text-align: center;
+  color: #fff;
+  min-height: 500px;
+  letter-spacing: 2px;
+  height:100vh;
+  overflow: hidden;
 }
-/*心*/
+.nav-name{
+   font-size:55px;
+   margin-top:110px;
+}
+.nav-intro{
+  margin-top:20px;
+   font-size: 16px;
+  color: #e8f380;
+  border-bottom: 2px solid #e8f380;
+  padding-bottom: 15px;
+  display:inline-block;
+}
+.dash-down{
+  display:inline-block;
+  height:100px;
+  border-left:2px dashed white;
+  margin-top:30px;
+}
 .heart{
   position:relative;
   font-size: 6px;
-  margin-left:320px;
+  display:inline-block;
+  left:-4em;
 }
 .heart:hover .squar,.heart:hover .circle{
   animation-play-state: paused;
