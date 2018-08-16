@@ -53,30 +53,30 @@
 }
 .heart{
   position:relative;
-  font-size: 6px;
+  font-size: 12px;
   display:inline-block;
-  left:-4em;
+  left:-2em;
 }
 .heart:hover .squar,.heart:hover .circle{
   animation-play-state: paused;
 }
 .squar{
-  width:4em;
-  height:4em;
-  left:2em;
-  top:2em;
+  width:2em;
+  height:2em;
+  left:1em;
+  top:1em;
 }
 .circle{
-  width:4em;
-  height:4em;
+  width:2em;
+  height:2em;
   border-radius:50%;
-  top:.3em;
+  top:.15em;
 }
 .left{
-  left:.3em;
+  left:.15em;
 }
 .right{
-  left:3.7em;
+  left:1.85em;
 }
 .squar,.circle{
   background:#d5093c;
@@ -86,7 +86,7 @@
   animation: beat 0.8s  infinite;
 }
 @keyframes beat {
-    0% {transform: scale(1) rotate(45deg) skew(10deg); box-shadow:0 0 .7em #d5093c;}
+    0% {transform: scale(1) rotate(45deg) skew(10deg); box-shadow:0 0 .35em #d5093c;}
     30% {transform: scale(1.03) rotate(45deg);  box-shadow:0 0 1.3em #d5093c;}
   61.8%{transform: scale(1.0618) rotate(45deg);  box-shadow:0 0 1.4em #d5093c;}
     100% {transform: scale(1) rotate(45deg); box-shadow:0 0 1em #d5093c;}
