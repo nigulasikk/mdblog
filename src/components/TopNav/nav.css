@@ -38,3 +38,42 @@ body,html{
   color:#ea4c4c;
   border-bottom: 3px solid #ea4c4c;
 }
+
+#top-banner-logo{
+  width:80px;
+  height:30px;
+  text-align:center;
+  line-height:30px;
+  font-size:12px;
+  font-weight:bolder;
+  background:red;
+  color:white;
+  letter-spacing:2px;
+  border-radius:3px 3px 10px 10px;
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.5);
+  transform: rotate(90deg);
+  transform-origin: top right;
+  position:absolute;
+  right:0;
+  top:250px;
+}
+.top-banner {
+  padding:0;
+  position: relative;
+  background: url('../../assets/bg.jpeg') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  text-align: center;
+  color: #fff;
+  min-height: 400px;
+  letter-spacing: 2px;
+  overflow: hidden;
+}
+.top-banner-name{
+   font-size:55px;
+   margin-top:180px;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}

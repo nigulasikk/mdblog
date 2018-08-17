@@ -1,8 +1,15 @@
+
+
 var fs = require('fs');
 var marked = require('marked');
 // 构建output目录
 var outputFold = 'build';
 var pageTitle = 'kaikai的主页';
+// 博客页面 和 博客列表页 top-banner
+var blogTopBanner =function (title) {
+ return '<div class="top-banner" > <div id="top-banner-logo">kaikai</div> <div class="top-banner-name">'+title+'</div> </div>'
+}
+
 init();
 //入口函数
 function init(){
@@ -66,7 +73,7 @@ function readJsonInfoOfAllPosts(filePath){
             link:'./' + targetFileName + '.html',
             title: dryTitle && dryTitle[1] || targetFileName,
             intro: dryIntro && dryIntro[1] || '',
-            pic: dryPic && dryPic[1] || './assets/default.jpeg'
+            pic: dryPic && dryPic[1] || './assets/bg.jpeg'
         });
      });
     // console.log(postArrays);
@@ -76,8 +83,8 @@ function readJsonInfoOfAllPosts(filePath){
 function writePostHtml(postsList) {
     let rawHtml = readFileAndParse('./src/index.html');
     let headDOM = fs.readFileSync('./src/components/TopNav/nav.html', 'utf-8');
-    let headCSS = fs.readFileSync('./src/components/TopNav/nav.css', 'utf-8');
-    let postsPageCSS = fs.readFileSync('./src/components/Posts/posts.css', 'utf-8');
+    let headCSS = readCssFile('./src/components/TopNav/nav.css');
+    let postsPageCSS = readCssFile('./src/components/Posts/posts.css');
     let headJS = fs.readFileSync('./src/components/TopNav/nav.js', 'utf-8');
     let postsDom = '';
     for (var i = 0;i<postsList.length;i++){
@@ -95,7 +102,7 @@ function writePostHtml(postsList) {
     }
     // 读取模板 ，把markdown内容注入
     let html = rawHtml
-                .replace('<!-- content -->', postsDom)
+                .replace('<!-- content -->', blogTopBanner('文章列表') + postsDom)
                 .replace('<!-- title -->', '文章列表')
                 .replace('<!-- header DOM -->', headDOM)
                 .replace('<!-- header CSS -->', '<style>' + headCSS + '</style>')
@@ -109,11 +116,11 @@ function writePostHtml(postsList) {
 function writeHtml(fileName,content) {
     let rawHtml = readFileAndParse('./src/index.html');
     let headDOM = fs.readFileSync('./src/components/TopNav/nav.html', 'utf-8');
-    let headCSS = fs.readFileSync('./src/components/TopNav/nav.css', 'utf-8');
+    let headCSS = readCssFile('./src/components/TopNav/nav.css');
     let headJS = fs.readFileSync('./src/components/TopNav/nav.js', 'utf-8');
     // 读取模板 ，把markdown内容注入
     let html = rawHtml
-                .replace('<!-- content -->', '<div class="markdown-body">' + content + '</div>')
+                .replace('<!-- content -->', blogTopBanner(fileName)+' <div class="markdown-body">' + content + '</div>')
                 .replace('<!-- title -->', fileName)
                 .replace('<!-- header DOM -->', headDOM)
                 .replace('<!-- header CSS -->', '<style>' + headCSS + '</style>')
@@ -126,10 +133,10 @@ function writeHtml(fileName,content) {
 function writeHomepageHtml() {
     let rawHtml = readFileAndParse('./src/index.html');
     let homepageDOM = fs.readFileSync('./src/components/HomePage/homepage.html', 'utf-8');
-    let homepageCSS = fs.readFileSync('./src/components/HomePage/homepage.css', 'utf-8');
+    let homepageCSS = readCssFile('./src/components/HomePage/homepage.css');
     let homepageJS = fs.readFileSync('./src/components/HomePage/homepage.js', 'utf-8');
     let headDOM = fs.readFileSync('./src/components/TopNav/nav.html', 'utf-8');
-    let headCSS = fs.readFileSync('./src/components/TopNav/nav.css', 'utf-8');
+    let headCSS = readCssFile('./src/components/TopNav/nav.css');
     let headJS = fs.readFileSync('./src/components/TopNav/nav.js', 'utf-8');
     // 读取模板 ，把markdown内容注入
     let html = rawHtml
@@ -155,6 +162,11 @@ function readFileAndParse(path){
         console.error('解析文件出错：'+path);
     }
 }
+// css文件需要把静态相对链接（webapck用的） 换成dist的相对链接
+function readCssFile(cssFilePath){
+    let cssString = fs.readFileSync(cssFilePath, 'utf-8');
+    return cssString.replace('../../assets','./assets');
+}
 // 字符转义
 function unescapeHtml(html){
     return html.replace(/&quot;/g, '"')
@@ -163,3 +175,4 @@ function unescapeHtml(html){
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>');
 }
+

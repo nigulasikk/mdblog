@@ -16,6 +16,17 @@ var webpackConfig = {
                     options: {}
                 }
             },
+            {
+                test: /\.(png|jpg|gif|jpeg)$/,
+                use: [
+                  {
+                    loader: 'url-loader',
+                    options: {
+                      limit: 8192
+                    }
+                  }
+                ]
+            },
             { test: /\.css$/, use: ['style-loader', 'css-loader'] }
         ]
     },
