@@ -4,10 +4,10 @@ var fs = require('fs');
 var marked = require('marked');
 // 构建output目录
 var outputFold = 'build';
-var pageTitle = 'kaikai的主页';
+var pageTitle = 'mdblog的主页';
 // 博客页面 和 博客列表页 top-banner
 var blogTopBanner =function (title) {
- return '<div class="top-banner" > <div id="top-banner-logo">kaikai</div> <div class="top-banner-name">'+title+'</div> </div>'
+ return '<div class="top-banner" > <div id="top-banner-logo">mdblog</div> <div class="top-banner-name">'+title+'</div> </div>'
 }
 
 init();
