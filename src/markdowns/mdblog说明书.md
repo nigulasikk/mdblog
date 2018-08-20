@@ -1,15 +1,9 @@
 <!--<img-url>buildAssetPath/default.jpeg</img-url>--> 
-
-<!--<title> mdblog 说明文档 </title>--> 
-
+<!--<title>mdblog说明文档</title>--> 
 <!--<intro>文章简介文章介文章简介简介文章简文章简介文章简介文章简介 </intro>--> 
-
 <!--<tag>README</tag>-->
-
 <!--<date>2018-08-20</date>-->
-
 mdblog 介绍
-
 mdblog是一个极简的，基于markdown的静态网页生成器。它诞生的初衷仅仅是我个人需要把一些markdown文件转成静态网页来作为我的博客。
 
 它是如何工作的
