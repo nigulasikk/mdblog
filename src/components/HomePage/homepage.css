@@ -1,3 +1,41 @@
+.features{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width:1300px;
+  margin:0 auto;
+}
+.feature{
+  flex-grow: 1;
+  flex-basis:30%;
+
+}
+.f-wraper{
+   width:350px;
+   background: #0000007d;
+   height: 120px;
+   padding:20px;
+   border-radius: 5px;
+}
+.f-title{
+  font-size:20px;
+}
+.f-content{
+  width:350px;
+  margin:10px auto;
+}
+.quick-start{
+  margin:100px auto;
+  background: #ea4c4c;
+  color:white;
+  padding:10px 10px;
+  width:100px;
+  display: block;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
 .heart-color{
   color:#ea4c4c;
 }
@@ -22,7 +60,7 @@
 .bg {
   padding:0;
   position: relative;
-  background: url('../../assets/bg.jpeg') no-repeat center center fixed;
+  background: url(https://images.unsplash.com/photo-1510256024294-cfce23b259c3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=db823bc279e83b297eb3f06402acf6f9) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;

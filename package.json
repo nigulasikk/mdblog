@@ -4,6 +4,7 @@
   "description": "",
   "main": "build.js",
   "scripts": {
+    "prebuild": "rm -rf build",
     "build": "node build.js",
     "dev": "webpack-dev-server --hot --open",
     "test": "echo \"Error: no test specified\" && exit 1"

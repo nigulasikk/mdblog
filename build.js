@@ -1,5 +1,4 @@
 
-
 var fs = require('fs');
 var marked = require('marked');
 // 构建output目录
@@ -37,11 +36,10 @@ function initDir(){
 function copyFolder(filePath){
     var files = fs.readdirSync(filePath);
     files.forEach(function(filename){
-        console.log(filename)
         fs.writeFileSync('./'+ outputFold +'/assets/' + filename ,  fs.readFileSync(filePath +'/'+filename ));
      });
 }
-// 读取一个文件夹下所有文件
+// 读取一个文件夹下所有文件 ，生产的时候，不用排序
 function readFolder(filePath){
     var files = fs.readdirSync(filePath);
     files.forEach(function(filename){
@@ -52,10 +50,14 @@ function readFolder(filePath){
         writeHtml(targetFileName, markdownContent);
      });
 }
-// 取所有博文信息
+// 取所有博文信息，post页面文章列表生成，得排序
 function readJsonInfoOfAllPosts(filePath){
     var postArrays = [];
     var files = fs.readdirSync(filePath);
+    files.sort(function(a,b){
+        return a.split('.')[0] - b.split('.')[0]
+    });
+    console.log(files);
     files.forEach(function(filename){
         if(filename.indexOf('.md') === -1) return;
         // 无后缀文件名
@@ -85,6 +87,7 @@ function writePostHtml(postsList) {
     let headDOM = fs.readFileSync('./src/components/TopNav/nav.html', 'utf-8');
     let headCSS = readCssFile('./src/components/TopNav/nav.css');
     let postsPageCSS = readCssFile('./src/components/Posts/posts.css');
+    let postsPageJS = readCssFile('./src/components/Posts/posts.js');
     let headJS = fs.readFileSync('./src/components/TopNav/nav.js', 'utf-8');
     let postsDom = '';
     for (var i = 0;i<postsList.length;i++){
@@ -108,6 +111,7 @@ function writePostHtml(postsList) {
                 .replace('<!-- header CSS -->', '<style>' + headCSS + '</style>')
                 .replace('<!-- postsPageCSS CSS -->', '<style>' + postsPageCSS + '</style>')
                 .replace('<!-- header JS -->', '<script>' + headJS + '</script>')
+                .replace('<!-- posts JS -->', '<script>' + postsPageJS + '</script>')
             ;
     fs.writeFileSync('./'+ outputFold +'/'  + 'posts.html', html, 'utf8');
     console.log('文章网页生成成功：'  + 'posts.html');
@@ -118,9 +122,10 @@ function writeHtml(fileName,content) {
     let headDOM = fs.readFileSync('./src/components/TopNav/nav.html', 'utf-8');
     let headCSS = readCssFile('./src/components/TopNav/nav.css');
     let headJS = fs.readFileSync('./src/components/TopNav/nav.js', 'utf-8');
+    let dryTitle = /<!--<title>(.*)<\/title>-->/.exec(content);
     // 读取模板 ，把markdown内容注入
     let html = rawHtml
-                .replace('<!-- content -->', blogTopBanner(fileName)+' <div class="markdown-body">' + content + '</div>')
+                .replace('<!-- content -->', blogTopBanner(dryTitle && dryTitle[1] ||fileName)+' <div class="markdown-body">' + content + '</div>')
                 .replace('<!-- title -->', fileName)
                 .replace('<!-- header DOM -->', headDOM)
                 .replace('<!-- header CSS -->', '<style>' + headCSS + '</style>')
