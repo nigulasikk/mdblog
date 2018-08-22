@@ -122,10 +122,12 @@ function writeHtml(fileName,content) {
     let headCSS = readCssFile('./src/components/TopNav/nav.css');
     let headJS = fs.readFileSync('./src/components/TopNav/nav.js', 'utf-8');
     let dryTitle = /<!--<title>(.*)<\/title>-->/.exec(content);
+    let dryIntro = /<!--<intro>(.*)<\/intro>-->/.exec(content);
     // 读取模板 ，把markdown内容注入
     let html = rawHtml
                 .replace('<!-- content -->', blogTopBanner(dryTitle && dryTitle[1] ||fileName)+' <div class="markdown-body">' + content + '</div>')
-                .replace('<!-- title -->', fileName)
+                .replace('<!-- title -->', dryTitle && dryTitle[1] )
+                .replace('mdblog描述', dryIntro && dryIntro[1])
                 .replace('<!-- header DOM -->', headDOM)
                 .replace('<!-- header CSS -->', '<style>' + headCSS + '</style>')
                 .replace('<!-- header JS -->', '<script>' + headJS + '</script>')
