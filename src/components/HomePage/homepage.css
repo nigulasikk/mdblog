@@ -24,6 +24,9 @@
   width:350px;
   margin:10px auto;
 }
+.f-content a{
+  color:white;
+}
 .quick-start{
   margin:100px auto;
   background: #ea4c4c;

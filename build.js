@@ -57,7 +57,6 @@ function readJsonInfoOfAllPosts(filePath){
     files.sort(function(a,b){
         return a.split('.')[0] - b.split('.')[0]
     });
-    console.log(files);
     files.forEach(function(filename){
         if(filename.indexOf('.md') === -1) return;
         // 无后缀文件名
