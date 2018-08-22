@@ -34,15 +34,25 @@ mdblog是一个极简的，基于markdown的静态网页生成器。它诞生的
 
 ## 全局安装
 
+安装脚手架
+
 ```
-# 安装脚手架
-npm install -g mdblog-create # 或者 yarn global add mdblog-create
-# 在指定目录，初始化项目
-mdblog init # 初始化过程中会让你自定义目录名称 project-name
+npm install -g mdblog-create 
+```
+
+在指定目录，初始化项目，过程中会让你自定义目录名称 project-name
+
+```
+mdblog init
+```
+
+进入项目 & 安装依赖
+
+```
 # 进入项目
 cd project-name
 # 安装依赖
-npm install # 或 yarn 
+npm install 
 ```
 
 ## 构建静态页面
