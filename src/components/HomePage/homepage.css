@@ -72,7 +72,7 @@
   min-height: 500px;
   letter-spacing: 2px;
   height:100vh;
-  overflow: hidden;
+  overflow: scroll;
 }
 .nav-name{
    font-size:55px;
